@@ -41,28 +41,34 @@
                 <select class="form-control form-input" id="supplier_id" name="supplier_id" required>
                 </select>
               </div>
-              <div class="col-md-12 row">
+              <div class="col-md-12">
                 <div class="form-group col-md-6">
                   <label for="loan_amount">Loan Amount</label>
                   <input type="number" step="0.01" class="form-control form-input" id="loan_amount" name="loan_amount" required>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="loan_date">Loan Date</label>
-                  <input type="date" class="form-control form-input" id="loan_date" name="loan_date" required>
+                  <label for="interest_rate">Interest Rate</label>
+                  <input type="number" step="0.01" class="form-control form-input" id="interest_rate" name="interest_rate" required>
                 </div>
               </div>
-              <div class="col-md-12 row">
-                <div class="form-group col-md-4">
+              <div class="col-md-12">
+                <div class="form-group col-md-6">
                   <label for="frequency">Frequency</label>
                   <input type="number" class="form-control form-input" id="frequency" name="frequency" required>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                   <label for="loan_period">Loan Period</label>
                   <input type="number" class="form-control form-input" id="loan_period" name="loan_period" required>
                 </div>
-                <div class="form-group col-md-4">
-                  <label for="interest_rate">Interest Rate</label>
-                  <input type="number" step="0.01" class="form-control form-input" id="interest_rate" name="interest_rate" required>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group col-md-6">
+                  <label for="loan_date">Loan Date</label>
+                  <input type="date" class="form-control form-input" id="loan_date" name="loan_date" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="payment_start">Payment Start</label>
+                  <input type="date" class="form-control form-input" id="payment_start" name="payment_start" required>
                 </div>
               </div>
             </form>

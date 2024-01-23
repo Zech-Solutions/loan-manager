@@ -7,6 +7,7 @@ $loan_date      = $_POST['loan_date'];
 $frequency      = (int) $_POST['frequency'];
 $loan_period    = (int) $_POST['loan_period'];
 $interest_rate  = (float) $_POST['interest_rate'];
+$payment_start  = $_POST['payment_start'];
 
 $loan_name = "GCash 20K";
 
