@@ -12,10 +12,12 @@
                 <thead>
                     <tr>
                       <th>#</th>
-                      <th>Supplier</th>
+                      <th>Name</th>
                       <th>Loan Date</th>
-                      <th>Loan Amount</th>
+                      <th>Principal</th>
+                      <th>Total Amount</th>
                       <th>Paid Amount</th>
+                      <th>Balance</th>
                       <th>Action</th>
                     </tr>
                 </thead>
@@ -32,8 +34,8 @@
         <h5>Add Loan</h5>
       </div>
       <div class="modal-body">
-        <div class="row col-md-12">
-          <div class="col-md-5">
+        <div class="row">
+          <div class="col-md-4">
             <form class="forms-sample" id="addForm">
               <input type="hidden" name="loan_id" id="loan_id" class="form-input">
               <div class="form-group">
@@ -41,7 +43,7 @@
                 <select class="form-control form-input" id="supplier_id" name="supplier_id" required>
                 </select>
               </div>
-              <div class="col-md-12">
+              <div class="row">
                 <div class="form-group col-md-6">
                   <label for="loan_amount">Loan Amount</label>
                   <input type="number" step="0.01" class="form-control form-input" id="loan_amount" name="loan_amount" required>
@@ -51,29 +53,35 @@
                   <input type="number" step="0.01" class="form-control form-input" id="interest_rate" name="interest_rate" required>
                 </div>
               </div>
-              <div class="col-md-12">
+              <div class="row">
                 <div class="form-group col-md-6">
                   <label for="frequency">Frequency</label>
-                  <input type="number" class="form-control form-input" id="frequency" name="frequency" required>
+                  <select class="form-control form-input" id="frequency" name="frequency" required>
+                    <option value="1">Monthly</option>
+                    <option value="2">Twice a month</option>
+                  </select>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="loan_period">Loan Period</label>
                   <input type="number" class="form-control form-input" id="loan_period" name="loan_period" required>
                 </div>
               </div>
-              <div class="col-md-12">
-                <div class="form-group col-md-6">
+                <div class="form-group">
                   <label for="loan_date">Loan Date</label>
                   <input type="date" class="form-control form-input" id="loan_date" name="loan_date" required>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group">
                   <label for="payment_start">Payment Start</label>
                   <input type="date" class="form-control form-input" id="payment_start" name="payment_start" required>
                 </div>
-              </div>
+                <div class="form-group">
+                  <button class="btn btn-sm btn-outline-success" type="submit" id="btn_submit">
+                      <span class="fa fa-check-circle"></span> Submit
+                  </button>
+                </div>
             </form>
           </div>
-          <div class="col-md-7" style="max-height: 400px;overflow:auto;">
+          <div class="col-md-8" style="max-height: 400px;overflow:auto;">
               <div class="table-responsive">
                 <table class="table table-bordered" id="tblLoanDetails" cellspacing="0" width="100%">
                     <thead>
@@ -93,7 +101,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-sm btn-outline-success" form="addForm" type="submit" id="btn_submit">
+      
+        <button class="btn btn-sm btn-outline-success" type="button" onclick="saveLoans()">
             <span class="fa fa-check-circle"></span> Submit
         </button>
         <button class="btn btn-sm btn-outline-danger" data-dismiss="modal">
@@ -129,14 +138,19 @@
   function renderUser() {
     $("#tbl_supplier").DataTable().destroy();
     table = $("#tbl_supplier").DataTable({
-      ajax: "ajax/get_suppliers.php",
+      ajax: "ajax/get_loans.php",
       columns: [
         { data: 'count' },
-        { data: 'supplier_name' },
+        { data: 'loan_name' },
+        { data: 'loan_date' },
+        { data: 'loan_amount' },
+        { data: 'total_amount' },
+        { data: 'paid_amount' },
+        { data: 'balance' },
         {
           mRender: function(data, type, row) {
             return `<button type="button" class="btn btn-warning btn-rounded btn-icon btn-sm btn-update-data"><i class="fas fa-edit"></i></button>
-            <button type="button" class="btn btn-danger btn-rounded btn-icon btn-sm" onclick="deleteEntry(${row.supplier_id})"><i class="fas fa-trash"></i></button>`;
+            <button type="button" class="btn btn-danger btn-rounded btn-icon btn-sm" onclick="deleteEntry(${row.loan_id})"><i class="fas fa-trash"></i></button>`;
           }
         },
       ]
@@ -218,6 +232,19 @@
     // console.log(form_loans.ammortizations[ammort_index][column_name]);
     form_loans.ammortizations[ammort_index][column_name] = $(el).val();
     // alert(column_name);
+  }
+
+  function saveLoans(){
+    $.post("ajax/add_loan.php",JSON.stringify(form_loans)
+    ,function(data,status){
+      renderUser();
+      $("#supplierModal").modal('hide');
+      if(data == 1){
+        success_add();
+      }else{
+        alert(data);
+      }
+    });
   }
 </script>
 <style>

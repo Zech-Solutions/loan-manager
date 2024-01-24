@@ -7,6 +7,8 @@ if ($page == 'dashboard') {
 	require_once 'views/loans.php';
 } else if ($page == 'suppliers') {
 	require_once 'views/suppliers.php';
+} else if ($page == 'report-salary-payable') {
+	require_once 'views/report_salary_payable.php';
 } else {
 	require_once 'views/404.php';
 }

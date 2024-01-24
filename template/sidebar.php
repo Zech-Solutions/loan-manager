@@ -36,10 +36,27 @@
     Master Data
 </div>
 
-<li class="nav-item <?=$page == 'event-category'?'active':'';?>">
+<li class="nav-item <?=$page == 'suppliers'?'active':'';?>">
     <a class="nav-link" href="index.php?page=suppliers">
         <i class="fas fa-fw fa-list"></i>
         <span>Suppliers</span></a>
+</li>
+
+<!-- Heading -->
+<div class="sidebar-heading mt-2">
+    Reports
+</div>
+
+<li class="nav-item <?=$page == 'event-category'?'active':'';?>">
+    <a class="nav-link" href="index.php?page=report-salary-payable">
+        <i class="fas fa-fw fa-list"></i>
+        <span>Payable by Salary</span></a>
+</li>
+
+<li class="nav-item <?=$page == 'event-category'?'active':'';?>">
+    <a class="nav-link" href="index.php?page=report-salary-payable">
+        <i class="fas fa-fw fa-list"></i>
+        <span>Accounts Payable</span></a>
 </li>
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">

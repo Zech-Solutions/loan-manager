@@ -63,12 +63,13 @@ function getSupplierData($supplier_id, $data_column = "supplier_name")
 	return $row[$data_column];
 }
 
-function countEventRanksByJudges($event_id)
+function sumLoanTotalAmount($loan_id,$inject = "")
 {
 	global $mysqli;
-	$sql = "SELECT judge_id AS count FROM tbl_event_ranks WHERE event_id = '$event_id' GROUP BY judge_id";
+	$sql = "SELECT SUM(amount) AS amount FROM tbl_loan_details WHERE loan_id = '$loan_id' $inject";
 	$fetch = $mysqli->query($sql);
-	return (int) $fetch->num_rows;
+	$row = $fetch->fetch_assoc();
+	return (float) $row['amount'];
 }
 
 function checkIfUsernameExists($username)
