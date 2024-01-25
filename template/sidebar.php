@@ -2,7 +2,7 @@
 <!-- Sidebar - Brand -->
 <li class="nav-item">
     <a class="nav-link" href="index.php">
-      <center><img class="img-fluid" src="assets/img/loan.jpg" style="width: 50%;"></center>
+      <center><img class="img-fluid" src="assets/img/logo_loan.png" style="width: 50%;"></center>
     </a>
 </li>
 

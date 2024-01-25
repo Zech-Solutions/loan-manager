@@ -31,7 +31,7 @@ if(isset($_SESSION['loan']['user_id'])){
             background-size: cover;
         }
         .bg-login-image-etally {
-            background: url(../assets/img/loan.jpg);
+            background: url(../assets/img/loan.png);
             background-position: center;
             background-size: cover;
         }

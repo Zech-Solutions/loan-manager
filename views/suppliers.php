@@ -5,7 +5,7 @@
     </a>
 </div>
 
-<div class="card shadow mb-4 border-left-success">
+<div class="card shadow mb-4 border-left-primary">
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-hover table-bordered" id="tbl_supplier" width="100%" cellspacing="0">

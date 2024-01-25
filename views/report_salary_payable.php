@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="card shadow mt-4 col border-left-success">
+    <div class="card shadow mt-4 col border-left-primary">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6 d-sm-flex align-items-center justify-content-between mb-4">
