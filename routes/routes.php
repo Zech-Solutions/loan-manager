@@ -9,6 +9,8 @@ if ($page == 'dashboard') {
 	require_once 'views/suppliers.php';
 } else if ($page == 'report-salary-payable') {
 	require_once 'views/report_salary_payable.php';
+} else if ($page == 'report-accounts-payable') {
+	require_once 'views/report_accounts_payable.php';
 } else {
 	require_once 'views/404.php';
 }

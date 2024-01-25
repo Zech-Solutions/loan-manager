@@ -2,7 +2,7 @@
 <!-- Sidebar - Brand -->
 <li class="nav-item">
     <a class="nav-link" href="index.php">
-      <center><img class="img-fluid" src="assets/img/logo.png" style="width: 50%;"></center>
+      <center><img class="img-fluid" src="assets/img/loan.jpg" style="width: 50%;"></center>
     </a>
 </li>
 
@@ -54,7 +54,7 @@
 </li>
 
 <li class="nav-item <?=$page == 'event-category'?'active':'';?>">
-    <a class="nav-link" href="index.php?page=report-salary-payable">
+    <a class="nav-link" href="index.php?page=report-accounts-payable">
         <i class="fas fa-fw fa-list"></i>
         <span>Accounts Payable</span></a>
 </li>

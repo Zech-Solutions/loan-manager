@@ -14,7 +14,7 @@ if(isset($_SESSION['loan']['user_id'])){
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>eTally - Login</title>
+    <title>LoanManager</title>
 
     <!-- Custom fonts for this template-->
     <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -31,14 +31,14 @@ if(isset($_SESSION['loan']['user_id'])){
             background-size: cover;
         }
         .bg-login-image-etally {
-            background: url(../assets/img/logo_login.png);
+            background: url(../assets/img/loan.jpg);
             background-position: center;
             background-size: cover;
         }
     </style>
 </head>
 
-<body class="bg-gradient-etally">
+<body class="bg-gradient-primary">
 
     <div class="container">
 
@@ -55,7 +55,7 @@ if(isset($_SESSION['loan']['user_id'])){
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">E-Tally: Event Organizer and Scoring Tabulation</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">LoanManager: Loan Management System</h1>
                                     </div>
                                     <form id="frmLogin" class="user">
                                         <div class="form-group">
@@ -81,41 +81,11 @@ if(isset($_SESSION['loan']['user_id'])){
                         </div>
                         <div class="container my-auto">
                             <div class="copyright text-center my-auto">
-                                <span>E-Tally: Event Organizer and Scoring Tabulation &copy; 2023</span>
+                                <span>LoanManager: Loan Management System &copy; 2023</span>
                             </div>
                         </div>
                         <br>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="modalProtest">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5>Create a Protest</h5>
-                </div>
-                <div class="modal-body">
-                <form class="forms-sample" id="formProtest">
-                    <div class="form-group">
-                        <label for="judge_ids">Event</label>
-                        <select name="event_id" id="event_id" class="form-control" style="width: 100%;" required>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="judge_ids">Remarks</label>
-                        <textarea class="form-control" name="protest" id="protest" cols="30" rows="5" placeholder="Discuss your protest here, don't worry you are anonymous!" required></textarea>
-                    </div>
-                </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-sm btn-outline-success" form="formProtest" type="submit" id="btn_submit_protest">
-                        <span class="fa fa-check-circle"></span> Submit
-                    </button>
-                    <button class="btn btn-sm btn-outline-danger" data-dismiss="modal">
-                        <span class="fa fa-times-circle"></span> Close
-                    </button>
                 </div>
             </div>
         </div>
@@ -151,34 +121,6 @@ if(isset($_SESSION['loan']['user_id'])){
                 }
             });
         });
-
-        
-        $("#formProtest").submit(function(e){
-            e.preventDefault();
-            $.post("../ajax/add_protest.php",$(this).serialize(),function(data,status){
-                $("#modalProtest").modal('hide');
-                if(data == 1){
-                    Swal.fire("Protest", "Successfully submit protest!", 'success');
-                }else{
-                    Swal.fire("Protest", "Error occur while processing data!", 'error');
-                }
-            });
-        });
-
-        function createProtest(){
-            $("#event_id").html("<option value=''> Please Select </option>");
-            $("#protest").val("");
-            $("#modalProtest").modal('show');
-            $.post("../ajax/get_events.php",{
-                params:"WHERE event_status != 'S'"
-            },function(data,status){
-                var res = JSON.parse(data);
-                for(let eventIndex = 0; eventIndex <= res.data.length; eventIndex++){
-                    const event_row = res.data[eventIndex];
-                    $("#event_id").append(`<option value='${event_row.event_id}'> ${event_row.event_name} </option>`);
-                }
-            });
-        }
     </script>
 
 </body>

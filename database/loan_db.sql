@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               10.4.28-MariaDB - mariadb.org binary distribution
--- Server OS:                    Win64
--- HeidiSQL Version:             12.5.0.6677
+-- Server version:               10.1.21-MariaDB - mariadb.org binary distribution
+-- Server OS:                    Win32
+-- HeidiSQL Version:             12.4.0.6659
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -14,29 +14,24 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
--- Dumping database structure for loan_db
-CREATE DATABASE IF NOT EXISTS `loan_db` /*!40100 DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci */;
-USE `loan_db`;
-
 -- Dumping structure for table loan_db.tbl_loans
 CREATE TABLE IF NOT EXISTS `tbl_loans` (
   `loan_id` int(11) NOT NULL AUTO_INCREMENT,
   `loan_name` varchar(255) NOT NULL DEFAULT '0',
-  `loan_amount` decimal(12,2) NOT NULL DEFAULT 0.00,
-  `supplier_id` int(11) NOT NULL DEFAULT 0,
-  `interest_rate` decimal(12,2) NOT NULL DEFAULT 0.00,
-  `monthly_payment` decimal(12,2) NOT NULL DEFAULT 0.00,
-  `frequency` int(11) NOT NULL DEFAULT 0,
-  `loan_period` int(11) NOT NULL DEFAULT 0,
+  `loan_amount` decimal(12,2) NOT NULL DEFAULT '0.00',
+  `supplier_id` int(11) NOT NULL DEFAULT '0',
+  `interest_rate` decimal(12,2) NOT NULL DEFAULT '0.00',
+  `monthly_payment` decimal(12,2) NOT NULL DEFAULT '0.00',
+  `frequency` int(11) NOT NULL DEFAULT '0',
+  `loan_period` int(11) NOT NULL DEFAULT '0',
   `loan_date` date NOT NULL,
   `payment_start` date NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`loan_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
--- Dumping data for table loan_db.tbl_loans: ~4 rows (approximately)
+-- Dumping data for table loan_db.tbl_loans: ~14 rows (approximately)
 INSERT INTO `tbl_loans` (`loan_id`, `loan_name`, `loan_amount`, `supplier_id`, `interest_rate`, `monthly_payment`, `frequency`, `loan_period`, `loan_date`, `payment_start`, `created_at`, `updated_at`) VALUES
 	(1, 'GLoan 20K', 20000.00, 1, 3.09, 2284.67, 1, 12, '2024-01-11', '2024-02-11', '2024-01-24 22:47:20', '2024-01-24 22:47:20'),
 	(2, 'GGives 4.6K', 4617.00, 2, 3.99, 568.97, 1, 12, '2023-08-28', '2023-09-28', '2024-01-24 22:50:06', '2024-01-24 22:50:06'),
@@ -49,25 +44,27 @@ INSERT INTO `tbl_loans` (`loan_id`, `loan_name`, `loan_amount`, `supplier_id`, `
 	(9, 'BillEase 7.2K', 7163.80, 3, 3.49, 1045.99, 2, 9, '2023-08-18', '2023-09-05', '2024-01-25 00:04:34', '2024-01-25 00:04:34'),
 	(10, 'BillEase 7.8K', 7780.20, 3, 3.49, 1136.00, 2, 9, '2023-08-17', '2023-09-05', '2024-01-25 00:08:35', '2024-01-25 00:08:35'),
 	(11, 'BillEase 7.6K', 7574.80, 3, 3.49, 1106.00, 2, 9, '2023-08-17', '2023-09-05', '2024-01-25 00:12:08', '2024-01-25 00:12:08'),
-	(12, 'CIMB 30K', 30000.00, 4, 1.77, 3031.00, 1, 12, '2023-02-27', '2023-04-01', '2024-01-25 00:20:40', '2024-01-25 00:20:40');
+	(12, 'CIMB 30K', 30000.00, 4, 1.77, 3031.00, 1, 12, '2023-02-27', '2023-04-01', '2024-01-25 00:20:40', '2024-01-25 00:20:40'),
+	(13, 'SLoan (Mark) 10.1K', 10052.29, 5, 4.95, 3848.35, 1, 3, '2023-12-29', '2024-01-29', '2024-01-25 08:56:20', '2024-01-25 08:56:20'),
+	(14, 'BillEase (Mark) 5K', 5013.30, 6, 3.49, 732.00, 2, 9, '2023-08-14', '2023-09-05', '2024-01-25 09:05:49', '2024-01-25 09:05:49');
 
 -- Dumping structure for table loan_db.tbl_loan_details
 CREATE TABLE IF NOT EXISTS `tbl_loan_details` (
   `loan_detail_id` int(11) NOT NULL AUTO_INCREMENT,
   `loan_detail_name` varchar(50) NOT NULL DEFAULT '0',
-  `loan_id` int(11) NOT NULL DEFAULT 0,
-  `amount` decimal(12,2) NOT NULL DEFAULT 0.00,
-  `paid_amount` decimal(12,2) NOT NULL DEFAULT 0.00,
-  `interest` decimal(12,2) NOT NULL DEFAULT 0.00,
-  `status` int(11) NOT NULL DEFAULT 0,
+  `loan_id` int(11) NOT NULL DEFAULT '0',
+  `amount` decimal(12,2) NOT NULL DEFAULT '0.00',
+  `paid_amount` decimal(12,2) NOT NULL DEFAULT '0.00',
+  `interest` decimal(12,2) NOT NULL DEFAULT '0.00',
+  `status` int(11) NOT NULL DEFAULT '0',
   `due_date` date NOT NULL,
   `salary_date` date NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`loan_detail_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=148 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=169 DEFAULT CHARSET=latin1;
 
--- Dumping data for table loan_db.tbl_loan_details: ~45 rows (approximately)
+-- Dumping data for table loan_db.tbl_loan_details: ~168 rows (approximately)
 INSERT INTO `tbl_loan_details` (`loan_detail_id`, `loan_detail_name`, `loan_id`, `amount`, `paid_amount`, `interest`, `status`, `due_date`, `salary_date`, `created_at`, `updated_at`) VALUES
 	(1, 'GLoan 20K 1/12', 1, 2284.67, 0.00, 0.00, 0, '2024-02-11', '2024-02-01', '2024-01-24 22:47:20', '2024-01-24 22:47:20'),
 	(2, 'GLoan 20K 2/12', 1, 2284.67, 0.00, 0.00, 0, '2024-03-11', '2024-03-01', '2024-01-24 22:47:20', '2024-01-24 22:47:20'),
@@ -215,37 +212,60 @@ INSERT INTO `tbl_loan_details` (`loan_detail_id`, `loan_detail_name`, `loan_id`,
 	(144, 'CIMB 30K 9/12', 12, 3031.00, 3031.00, 0.00, 1, '2023-12-01', '2023-12-01', '2024-01-25 00:20:40', '2024-01-25 00:35:35'),
 	(145, 'CIMB 30K 10/12', 12, 3031.00, 3031.00, 0.00, 1, '2024-01-01', '2024-01-01', '2024-01-25 00:20:40', '2024-01-25 00:36:41'),
 	(146, 'CIMB 30K 11/12', 12, 3031.00, 0.00, 0.00, 0, '2024-02-01', '2024-02-01', '2024-01-25 00:20:40', '2024-01-25 00:20:40'),
-	(147, 'CIMB 30K 12/12', 12, 3031.00, 0.00, 0.00, 0, '2024-03-01', '2024-03-01', '2024-01-25 00:20:40', '2024-01-25 00:20:40');
+	(147, 'CIMB 30K 12/12', 12, 3031.00, 0.00, 0.00, 0, '2024-03-01', '2024-03-01', '2024-01-25 00:20:40', '2024-01-25 00:20:40'),
+	(148, 'SLoan (Mark) 10.1K 1/3', 13, 3848.35, 0.00, 0.00, 0, '2024-01-29', '2024-01-16', '2024-01-25 08:56:20', '2024-01-25 08:56:20'),
+	(149, 'SLoan (Mark) 10.1K 2/3', 13, 3848.35, 0.00, 0.00, 0, '2024-02-29', '2024-02-16', '2024-01-25 08:56:20', '2024-01-25 08:56:20'),
+	(150, 'SLoan (Mark) 10.1K 3/3', 13, 3848.35, 0.00, 0.00, 0, '2024-03-29', '2024-03-16', '2024-01-25 08:56:20', '2024-01-25 08:56:20'),
+	(151, 'BillEase (Mark) 5K 1/18', 14, 366.00, 366.00, 0.00, 1, '2023-09-05', '2023-09-01', '2024-01-25 09:05:49', '2024-01-25 09:07:06'),
+	(152, 'BillEase (Mark) 5K 2/18', 14, 366.00, 366.00, 0.00, 1, '2023-09-20', '2023-09-16', '2024-01-25 09:05:49', '2024-01-25 09:07:11'),
+	(153, 'BillEase (Mark) 5K 2/18', 14, 366.00, 366.00, 0.00, 1, '2023-10-05', '2023-10-01', '2024-01-25 09:05:49', '2024-01-25 09:07:18'),
+	(154, 'BillEase (Mark) 5K 4/18', 14, 366.00, 366.00, 0.00, 1, '2023-10-20', '2023-10-16', '2024-01-25 09:05:49', '2024-01-25 09:07:24'),
+	(155, 'BillEase (Mark) 5K 3/18', 14, 366.00, 366.00, 0.00, 1, '2023-11-05', '2023-11-01', '2024-01-25 09:05:49', '2024-01-25 09:07:31'),
+	(156, 'BillEase (Mark) 5K 6/18', 14, 366.00, 366.00, 0.00, 1, '2023-11-20', '2023-11-16', '2024-01-25 09:05:49', '2024-01-25 09:07:37'),
+	(157, 'BillEase (Mark) 5K 4/18', 14, 366.00, 366.00, 0.00, 1, '2023-12-05', '2023-12-01', '2024-01-25 09:05:49', '2024-01-25 09:07:42'),
+	(158, 'BillEase (Mark) 5K 8/18', 14, 366.00, 366.00, 0.00, 1, '2023-12-20', '2023-12-16', '2024-01-25 09:05:49', '2024-01-25 09:07:48'),
+	(159, 'BillEase (Mark) 5K 5/18', 14, 366.00, 366.00, 0.00, 1, '2024-01-05', '2024-01-01', '2024-01-25 09:05:49', '2024-01-25 09:07:56'),
+	(160, 'BillEase (Mark) 5K 10/18', 14, 366.00, 366.00, 0.00, 1, '2024-01-20', '2024-01-16', '2024-01-25 09:05:49', '2024-01-25 09:08:28'),
+	(161, 'BillEase (Mark) 5K 6/18', 14, 366.00, 0.00, 0.00, 0, '2024-02-05', '2024-02-01', '2024-01-25 09:05:49', '2024-01-25 09:05:49'),
+	(162, 'BillEase (Mark) 5K 12/18', 14, 366.00, 0.00, 0.00, 0, '2024-02-20', '2024-02-16', '2024-01-25 09:05:49', '2024-01-25 09:05:49'),
+	(163, 'BillEase (Mark) 5K 7/18', 14, 366.00, 0.00, 0.00, 0, '2024-03-05', '2024-03-01', '2024-01-25 09:05:49', '2024-01-25 09:05:49'),
+	(164, 'BillEase (Mark) 5K 14/18', 14, 366.00, 0.00, 0.00, 0, '2024-03-20', '2024-03-16', '2024-01-25 09:05:49', '2024-01-25 09:05:49'),
+	(165, 'BillEase (Mark) 5K 8/18', 14, 366.00, 0.00, 0.00, 0, '2024-04-05', '2024-04-01', '2024-01-25 09:05:49', '2024-01-25 09:05:49'),
+	(166, 'BillEase (Mark) 5K 16/18', 14, 366.00, 0.00, 0.00, 0, '2024-04-20', '2024-04-16', '2024-01-25 09:05:49', '2024-01-25 09:05:49'),
+	(167, 'BillEase (Mark) 5K 9/18', 14, 366.00, 0.00, 0.00, 0, '2024-05-05', '2024-05-01', '2024-01-25 09:05:49', '2024-01-25 09:05:49'),
+	(168, 'BillEase (Mark) 5K 18/18', 14, 366.00, 0.00, 0.00, 0, '2024-05-20', '2024-05-16', '2024-01-25 09:05:49', '2024-01-25 09:05:49');
 
 -- Dumping structure for table loan_db.tbl_suppliers
 CREATE TABLE IF NOT EXISTS `tbl_suppliers` (
   `supplier_id` int(11) NOT NULL AUTO_INCREMENT,
   `supplier_name` varchar(50) NOT NULL DEFAULT '0',
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`supplier_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Dumping data for table loan_db.tbl_suppliers: ~2 rows (approximately)
+-- Dumping data for table loan_db.tbl_suppliers: ~4 rows (approximately)
 INSERT INTO `tbl_suppliers` (`supplier_id`, `supplier_name`, `created_at`, `updated_at`) VALUES
 	(1, 'GLoan', '2024-01-24 22:46:36', '2024-01-24 22:46:36'),
 	(2, 'GGives', '2024-01-24 22:46:45', '2024-01-24 22:46:45'),
 	(3, 'BillEase', '2024-01-24 23:43:07', '2024-01-24 23:43:07'),
-	(4, 'CIMB', '2024-01-25 00:15:47', '2024-01-25 00:15:47');
+	(4, 'CIMB', '2024-01-25 00:15:47', '2024-01-25 00:15:47'),
+	(5, 'SLoan (Mark)', '2024-01-25 08:52:13', '2024-01-25 08:52:13'),
+	(6, 'BillEase (Mark)', '2024-01-25 08:52:26', '2024-01-25 08:52:26');
 
 -- Dumping structure for table loan_db.tbl_users
 CREATE TABLE IF NOT EXISTS `tbl_users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `account_id` int(11) NOT NULL DEFAULT 0,
+  `account_id` int(11) NOT NULL DEFAULT '0',
   `account_name` varchar(50) NOT NULL DEFAULT '0',
   `username` varchar(50) NOT NULL DEFAULT '0',
   `password` varchar(32) NOT NULL DEFAULT '0',
   `user_category` varchar(1) NOT NULL DEFAULT '0',
   `user_img` varchar(15) NOT NULL DEFAULT 'user_img.png',
-  `date_added` datetime NOT NULL DEFAULT current_timestamp(),
-  `date_modified` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `date_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table loan_db.tbl_users: ~1 rows (approximately)
 INSERT INTO `tbl_users` (`user_id`, `account_id`, `account_name`, `username`, `password`, `user_category`, `user_img`, `date_added`, `date_modified`) VALUES

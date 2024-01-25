@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-light bg-etally topbar mb-4 static-top shadow">
+<nav class="navbar navbar-expand navbar-light bg-primary topbar mb-4 static-top shadow">
 
 <!-- Sidebar Toggle (Topbar) -->
 <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">

@@ -12,7 +12,7 @@ if(!isset($_SESSION['loan']['user_id'])){
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eTally</title>
+  <title>Loan Manager</title>
   <!-- base:css -->
   <!-- Custom fonts for this template-->
   <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -113,7 +113,7 @@ if(!isset($_SESSION['loan']['user_id'])){
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-etally sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
           <?php require 'template/sidebar.php'; ?>
         </ul>
         <!-- End of Sidebar -->
