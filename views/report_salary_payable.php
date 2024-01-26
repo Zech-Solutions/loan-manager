@@ -14,11 +14,11 @@
                         <tr>
                             <th>#</th>
                             <th>Loan</th>
+                            <th>Due Date</th>
+                            <th>Salary Date</th>
                             <th>Amount</th>
                             <th>Paid Amount</th>
                             <th>Balance</th>
-                            <th>Due Date</th>
-                            <th>Salary Date</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -65,23 +65,23 @@
             }else{
                 var status_btn = `<button class="btn btn-info btn-sm" onclick="payLoan(${row.loan_detail_id})"><span class="fa fa-check"></span> Pay</button>`;
             }
-            tbody_tr += `<tr>
+            tbody_tr += `<tr class='${row.overdue?'overdue':''}'>
                 <td>${row.count}</td>
                 <td>${row.loan_detail_name}</td>
-                <td>${row.amount}</td>
-                <td>${row.paid_amount}</td>
-                <td>${row.amount - row.paid_amount}</td>
                 <td>${row.due_date}</td>
                 <td>${row.salary_date}</td>
+                <td class="text-right">${numberFormat(row.amount)}</td>
+                <td class="text-right">${numberFormat(row.paid_amount)}</td>
+                <td class="text-right">${numberFormat(row.amount - row.paid_amount)}</td>
                 <td>${status_btn}</td>
             </tr>`;
         }
         $("#tblLoanDetails tbody").html(tbody_tr);
-        $("#tblLoanDetails tfoot").html(`<tr>
-            <th colspan='2'></th>
-            <th>${total_amount}</th>
-            <th>${total_paid_amount}</th>
-            <th>${total_amount-total_paid_amount}</th>
+        $("#tblLoanDetails tfoot").html(`<tr style="background-color:#B9F6CA;color:#424242;font-size:12px;">
+            <th colspan='4'></th>
+            <th class="text-right">${numberFormat(total_amount)}</th>
+            <th class="text-right">${numberFormat(total_paid_amount)}</th>
+            <th class="text-right">${numberFormat(total_amount-total_paid_amount)}</th>
         </tr>`);
     });
   }
@@ -98,3 +98,10 @@
     }
   }
 </script>
+
+<style>
+  .overdue {
+    background-color: red;
+    color: #fff;
+  }
+</style>

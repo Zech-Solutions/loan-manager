@@ -9,7 +9,12 @@ $response['data'] = array();
 
 $count = 1;
 while ($row = $fetch->fetch_assoc()) {
+    $overdue = false;
+    if(date('Y-m-d') > $row['due_date'] && $row['status'] == 0){
+        $overdue = true;
+    }
     $row['count'] = $count++;
+    $row['overdue'] = $overdue;
 	array_push($response['data'], $row);
 }
 

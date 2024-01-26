@@ -5,7 +5,7 @@
 <div class="card shadow mb-4 border-left-primary">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-hover table-bordered" id="tbl_supplier" width="100%" cellspacing="0">
+            <table class="table table-hover table-bordered" id="tblLoanDetails" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                       <th>#</th>
@@ -33,49 +33,41 @@
 <script>
   var isEdit = false, table, form_loans = [];
   $(document).ready(function() {
-    renderUser();
+    renderLoans();
   });
-  function renderUser() {
-    $("#tbl_supplier").DataTable().destroy();
-    table = $("#tbl_supplier").DataTable({
-      ajax: "ajax/get_loans.php",
-      paging:false,
-      scrollY:"400px",
-      "footerCallback": function(row, data, start, end, display) {
-            var api = this.api(),
-                data;
-
-            var intVal = function(i) {
-                return typeof i === 'string' ?
-                    i.replace(/[\$,]/g, '') * 1 :
-                    typeof i === 'number' ?
-                    i : 0;
-            };
-
-            total = api.column(6).data().reduce(function(a, b) {return intVal(a) + intVal(b);}, 0);
-            pageTotal = api.column(6, {page: 'current'}).data().reduce(function(a, b) {return intVal(a) + intVal(b);}, 0);
-
-            $(api.column(6).footer()).html(
-                "<strong><span>&#8369;</span> " + this.fnSettings().fnFormatNumber(parseFloat(parseFloat(pageTotal).toFixed(2))) + " (<span>&#8369;</span> " + this.fnSettings().fnFormatNumber(parseFloat(parseFloat(total).toFixed(2))) + " Total)</strong>"
-            );
-        },
-      columns: [
-        { data: 'count' },
-        { data: 'loan_name' },
-        { data: 'loan_date' },
-        { data: 'loan_amount' },
-        { data: 'total_amount' },
-        { data: 'paid_amount' },
-        { data: 'balance' }
-      ]
+  
+  function renderLoans(){
+    var params = `ORDER BY loan_date ASC`;
+    var tbody_tr = '', total_loan_amount = 0, total_paid_amount = 0, total_balance = 0 ,total_amount_with_interest = 0;
+    $.post("ajax/get_loans.php",{
+        params:params
+    },function(data,status){
+        var res = JSON.parse(data);
+        for (let index = 0; index < res.data.length; index++) {
+            const row = res.data[index];
+            total_loan_amount += row.loan_amount * 1;
+            total_paid_amount += row.paid_amount * 1;
+            total_balance += row.balance * 1;
+            total_amount_with_interest += row.total_amount * 1;
+            tbody_tr += `<tr>
+                <td>${row.count}</td>
+                <td>${row.loan_name}</td>
+                <td>${row.loan_date}</td>
+                <td class="text-right">${numberFormat(row.loan_amount)}</td>
+                <td class="text-right">${numberFormat(row.total_amount)}</td>
+                <td class="text-right">${numberFormat(row.paid_amount)}</td>
+                <td class="text-right">${numberFormat(row.balance)}</td>
+            </tr>`;
+        }
+        $("#tblLoanDetails tbody").html(tbody_tr);
+        $("#tblLoanDetails tfoot").html(`<tr style="background-color:#B9F6CA;color:#424242;font-size:12px;">
+            <th colspan='3'></th>
+            <th class="text-right">${numberFormat(total_loan_amount)}</th>
+            <th class="text-right">${numberFormat(total_amount_with_interest)}</th>
+            <th class="text-right">${numberFormat(total_paid_amount)}</th>
+            <th class="text-right">${numberFormat(total_balance)}</th>
+        </tr>`);
     });
-  }
-
-  function getTotal(){
-    let totalAmount = table.column('balance:name').data().reduce(function (a, b) {
-        return a + b;
-    }, 0);
-    alert(totalAmount);
   }
 </script>
 <style>

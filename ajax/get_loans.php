@@ -1,7 +1,7 @@
 <?php
 include '../core/config.php';
-
-$sql = "SELECT * FROM tbl_loans";
+$inject = isset($_POST["params"]) ? $_POST["params"] : "";
+$sql = "SELECT * FROM tbl_loans $inject";
 $fetch = $mysqli->query($sql);
 
 $response['data'] = array();

@@ -96,6 +96,13 @@ if(!isset($_SESSION['loan']['user_id'])){
   function swal_success(title, desc = '') {
     Swal.fire(title, desc, 'success');
   }
+  function numberFormat(y, n = 2,return_string=false) {
+		y = y * 1;
+		if(y < 1 && return_string == true)
+			return '';
+		x = y.toFixed(n);
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
   </script>
 </head>
 <style>
