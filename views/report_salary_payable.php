@@ -52,12 +52,20 @@
     var params = `WHERE salary_date = '${salary_date}' ORDER BY due_date ASC`;
     var tbody_tr = '', total_amount = 0, total_paid_amount = 0;
     $.post("ajax/get_loan_details.php",{
-        params:params
+        params:params,
+        salary_date:salary_date
     },function(data,status){
         var res = JSON.parse(data);
+        
+        tbody_tr += `<tr>
+            <td colspan='6'></td>
+            <td class="text-right">${numberFormat(res.bb)}</td>
+            <td></td>
+        </tr>`;
         for (let index = 0; index < res.data.length; index++) {
             const row = res.data[index];
-            total_amount += row.amount * 1;
+            const amount = (row.amount * 1) + (row.penalty * 1)
+            total_amount += amount;
             total_paid_amount += row.paid_amount * 1;
 
             if(row.status == 1){
@@ -70,7 +78,7 @@
                 <td>${row.loan_detail_name}</td>
                 <td>${row.due_date}</td>
                 <td>${row.salary_date}</td>
-                <td class="text-right">${numberFormat(row.amount)}</td>
+                <td class="text-right">${numberFormat(amount)}</td>
                 <td class="text-right">${numberFormat(row.paid_amount)}</td>
                 <td class="text-right">${numberFormat(row.amount - row.paid_amount)}</td>
                 <td>${status_btn}</td>
@@ -81,7 +89,7 @@
             <th colspan='4'></th>
             <th class="text-right">${numberFormat(total_amount)}</th>
             <th class="text-right">${numberFormat(total_paid_amount)}</th>
-            <th class="text-right">${numberFormat(total_amount-total_paid_amount)}</th>
+            <th class="text-right">${numberFormat(res.bb+total_amount-total_paid_amount)}</th>
         </tr>`);
     });
   }

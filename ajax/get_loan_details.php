@@ -7,6 +7,10 @@ $fetch = $mysqli->query($sql);
 
 $response['data'] = array();
 
+if(isset($_POST['salary_date'])){
+    $response['bb'] = sumPayablesAmount("AND salary_date < '".$_POST['salary_date']."'");
+}
+
 $count = 1;
 while ($row = $fetch->fetch_assoc()) {
     $overdue = false;

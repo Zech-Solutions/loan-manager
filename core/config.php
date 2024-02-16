@@ -66,7 +66,16 @@ function getSupplierData($supplier_id, $data_column = "supplier_name")
 function sumLoanTotalAmount($loan_id,$inject = "")
 {
 	global $mysqli;
-	$sql = "SELECT SUM(amount) AS amount FROM tbl_loan_details WHERE loan_id = '$loan_id' $inject";
+	$sql = "SELECT SUM(amount+penalty) AS amount FROM tbl_loan_details WHERE loan_id = '$loan_id' $inject";
+	$fetch = $mysqli->query($sql);
+	$row = $fetch->fetch_assoc();
+	return (float) $row['amount'];
+}
+
+function sumPayablesAmount($inject = "")
+{
+	global $mysqli;
+	$sql = "SELECT SUM(amount+penalty) AS amount FROM tbl_loan_details WHERE `status` = 0 $inject";
 	$fetch = $mysqli->query($sql);
 	$row = $fetch->fetch_assoc();
 	return (float) $row['amount'];
